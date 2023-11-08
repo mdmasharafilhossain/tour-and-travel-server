@@ -36,6 +36,7 @@ async function run() {
 run().catch(console.dir);
 
 const serviceCollection = client.db('tourTravel').collection('tour');
+const BookingCollection = client.db('tourTravel').collection('booking');
 app.get('/service', async(req,res)=>{
     const cursor = serviceCollection.find();
     const result = await cursor.toArray();
