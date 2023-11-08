@@ -72,12 +72,23 @@ app.post('/service', async(req,res)=>{
 
 // bookings 
 
+
 app.post('/bookings', async(req,res)=>{
   const BookProducts = req.body;
   console.log(BookProducts);
   const result = await BookingCollection.insertOne(BookProducts);
   res.send(result);
 });
+app.get('/bookings', async (req,res)=>{
+  console.log(req.query.ServiceEmail);
+  
+  let query = {};
+  if(req.query?.ServiceEmail){
+    query = {email: req.query.ServiceEmail}
+  }
+  const result = await BookingCollection.find(query).toArray();
+  res.send(result)
+})
 
 app.get('/bookings', async(req,res)=>{
   const cursor = BookingCollection.find();
