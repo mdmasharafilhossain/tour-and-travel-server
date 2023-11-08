@@ -51,6 +51,15 @@ app.get('/service/:id',async(req,res)=>{
   res.send(result);
   
 });
+
+// search email
+app.get('/service/:service_email', async (req,res)=>{
+  console.log(req.query);
+  
+  const service_email = req.params.service_email;
+  const result = await serviceCollection.find({service_email}).toArray();
+  res.send(result)
+})
 // Add Services 
 app.post('/service', async(req,res)=>{
   const AddNewService = req.body;
@@ -58,6 +67,8 @@ app.post('/service', async(req,res)=>{
   const result = await serviceCollection.insertOne(AddNewService);
   res.send(result);
 });
+// search by email
+
 
 // bookings 
 
