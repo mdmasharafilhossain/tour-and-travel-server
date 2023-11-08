@@ -57,7 +57,7 @@ app.get('/service/:service_email', async (req,res)=>{
   console.log(req.query);
   
   const service_email = req.params.service_email;
-  const result = await serviceCollection.find({service_email}).toArray();
+  const result = await serviceCollection.find({service_email: service_email}).toArray();
   res.send(result)
 })
 // Add Services 
@@ -79,13 +79,10 @@ app.post('/bookings', async(req,res)=>{
   const result = await BookingCollection.insertOne(BookProducts);
   res.send(result);
 });
-app.get('/bookings', async (req,res)=>{
+app.get('/bookings/:ServiceEmail', async (req,res)=>{
   console.log(req.query.ServiceEmail);
   
-  let query = {};
-  if(req.query?.ServiceEmail){
-    query = {email: req.query.ServiceEmail}
-  }
+  
   const result = await BookingCollection.find(query).toArray();
   res.send(result)
 })
