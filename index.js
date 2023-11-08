@@ -50,7 +50,14 @@ app.get('/service/:id',async(req,res)=>{
   const result = await serviceCollection.findOne(query);
   res.send(result);
   
-})
+});
+// Add Services 
+app.post('/service', async(req,res)=>{
+  const AddNewService = req.body;
+  console.log(AddNewService);
+  const result = await serviceCollection.insertOne(AddNewService);
+  res.send(result);
+});
 
 // bookings 
 
