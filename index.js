@@ -52,6 +52,21 @@ app.get('/service/:id',async(req,res)=>{
   
 })
 
+// bookings 
+
+app.post('/bookings', async(req,res)=>{
+  const BookProducts = req.body;
+  console.log(BookProducts);
+  const result = await BookingCollection.insertOne(BookProducts);
+  res.send(result);
+});
+
+app.get('/bookings', async(req,res)=>{
+  const cursor = BookingCollection.find();
+  const result = await cursor.toArray();
+  res.send(result);
+});
+
 app.get('/',(req,res)=>{
     res.send('Server Running Successfully');
 });
